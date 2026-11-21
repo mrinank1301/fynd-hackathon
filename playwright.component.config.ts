@@ -3,7 +3,7 @@ import { defineConfig, devices } from "@playwright/experimental-ct-react";
 export default defineConfig({
   testDir: "./tests/component",
   fullyParallel: true,
-  workers: process.env.CI ? 2 : undefined,
+  workers: 2,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   reporter: [

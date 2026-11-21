@@ -39,7 +39,7 @@ playwright/          Component-test harness
 
 Each suite uses its own Playwright config and report folder. Every test navigates to or mounts a new page/component, giving it a clean state.
 
-Browser suites pin a 1280×900 viewport, device scale, locale, timezone, color scheme, and reduced-motion preference. CI limits each suite to two workers to reduce load-related timing variance; assertions wait on visible state instead of fixed delays.
+Browser suites pin a 1280×900 viewport, device scale, locale, timezone, color scheme, and reduced-motion preference. Each suite uses two workers to reduce load-related timing variance; assertions wait on visible state instead of fixed delays.
 
 ### Regression: `npm run test:regression`
 
@@ -47,7 +47,7 @@ Runs browser-level customer journeys against the local demo: catalog and image l
 
 ### Functional: `npm run test:functional`
 
-Runs automatically on pushes and pull requests. The tests intercept `/api/orders` and assert the outgoing request body, successful response handling, service failure recovery, empty-cart rejection, and rapid double submission. They assert visible outcomes and service-call counts rather than relying on a production service.
+Runs automatically on pushes and pull requests. The tests intercept `/api/orders` and assert the trimmed request body, successful response handling, retry after service failure, empty-cart and whitespace-name rejection, and rapid double submission. They assert visible outcomes and service-call counts rather than relying on a production service.
 
 ### Component: `npm run test:component`
 
