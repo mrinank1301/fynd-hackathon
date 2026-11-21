@@ -21,6 +21,6 @@ test("order breakdown shows subtotal, free shipping, and total", async ({
   await expect(page.getByTestId("order-total")).toHaveText("$68.00");
   await expect(summary).toHaveScreenshot("order-breakdown.png", {
     animations: "disabled",
-    maxDiffPixelRatio: 0.12,
+    maxDiffPixels: 200,
   });
 });

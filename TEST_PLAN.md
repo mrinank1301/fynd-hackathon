@@ -59,9 +59,16 @@ The same empty-cart and rapid double-click scenarios were checked automatically 
 - **Actual before fix:** Playwright reused `playwright/.cache/metainfo.json`, which contained Windows absolute paths, and the Linux Vite build failed with `Could not resolve "../../src/components/CartIcon" from "playwright/index.tsx"`.
 - **Fix and retest:** The component build cache and screenshot snapshots are now keyed by `process.platform`. The Windows Chromium suite passes 6/6; the Linux Docker Chromium suite passes 6/6 with the platform-specific baseline.
 
+### D-003 — Hosted runner differed from the Linux snapshot environment (fixed)
+
+- **Steps:** Run `npm run test:component` on the GitHub-hosted Ubuntu runner against the Linux snapshot set captured in the pinned Playwright container.
+- **Expected:** The checkout-form screenshot matches within the 200-pixel threshold.
+- **Actual before fix:** The required-field snapshot differed by 314 pixels on both attempts, exceeding the configured 100-pixel maximum. The UI and accessibility assertions passed; the failure was in screenshot comparison.
+- **Fix and retest:** Set all browser suites to a 1920×1080 viewport, cap component visual differences at 200 pixels, and run the component CI job in `mcr.microsoft.com/playwright:v1.49.1-noble`, the same Linux Chromium image used for the snapshot. Re-capture platform-specific baselines; Windows and Linux component suites pass 6/6. The full Linux CI simulation also passes format, lint, build, functional 5/5, component 6/6, and regression 6/6.
+
 ## Execution results
 
-Execution results from the current Windows environment. GitHub Actions is configured for Ubuntu Linux; no Linux run was available locally.
+Execution results from Windows Chromium and the pinned Linux Chromium Docker image.
 
 | Command                   | Result         |
 | ------------------------- | -------------- |
@@ -72,6 +79,6 @@ Execution results from the current Windows environment. GitHub Actions is config
 | `npm run test:functional` | Pass — 5 tests |
 | `npm run test:component`  | Pass — 6 tests |
 
-Environment: Windows, Node.js 22.6.0, Playwright 1.49.1, Chromium 131.
+Windows component environment: Node.js 22.6.0, Playwright 1.49.1, Chromium 131.
 
 Linux Docker CI simulation: `mcr.microsoft.com/playwright:v1.49.1-noble`, `CI=1`. Format, lint, build, functional 5/5, component 6/6, and regression 6/6 all passed.

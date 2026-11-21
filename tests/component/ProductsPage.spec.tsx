@@ -23,7 +23,7 @@ test("product catalog renders all six local images and forwards add actions", as
     .toBe(true);
   await expect(catalog).toHaveScreenshot("products-catalog.png", {
     animations: "disabled",
-    maxDiffPixelRatio: 0.12,
+    maxDiffPixels: 200,
   });
 
   await page

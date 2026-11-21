@@ -42,6 +42,7 @@ jobs:
   component:
     name: Component visuals and interactions
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.49.1-noble
     needs: quality
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +51,6 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
       - run: npm run test:component
       - if: always()
         uses: actions/upload-artifact@v4

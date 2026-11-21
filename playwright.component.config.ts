@@ -15,7 +15,7 @@ export default defineConfig({
   use: {
     ...devices["Desktop Chrome"],
     ctCacheDir: `playwright/.cache/${process.platform}`,
-    viewport: { width: 1280, height: 900 },
+    viewport: { width: 1920, height: 1080 },
     deviceScaleFactor: 1,
     locale: "en-US",
     timezoneId: "UTC",

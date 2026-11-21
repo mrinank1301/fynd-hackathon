@@ -20,7 +20,7 @@ test("empty cart visual snapshot and accessible empty state", async ({
   );
   await expect(page.locator(".cart-panel")).toHaveScreenshot("cart-empty.png", {
     animations: "disabled",
-    maxDiffPixelRatio: 0.12,
+    maxDiffPixels: 200,
   });
 });
 
@@ -34,7 +34,7 @@ test("quantity props recalculate total and removal restores the empty state", as
   await expect(page.getByLabel("Field Notes line total")).toHaveText("$24.00");
   await expect(component).toHaveScreenshot("cart-with-item.png", {
     animations: "disabled",
-    maxDiffPixelRatio: 0.12,
+    maxDiffPixels: 200,
   });
 
   await page.getByLabel("Field Notes quantity").fill("4");

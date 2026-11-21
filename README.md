@@ -39,7 +39,7 @@ playwright/          Component-test harness
 
 Each suite uses its own Playwright config and report folder. Every test navigates to or mounts a new page/component, giving it a clean state.
 
-Browser suites pin a 1280×900 viewport, device scale, locale, timezone, color scheme, and reduced-motion preference. Each suite uses two workers to reduce load-related timing variance; assertions wait on visible state instead of fixed delays.
+Browser suites pin a 1920×1080 viewport, device scale, locale, timezone, color scheme, and reduced-motion preference. Each suite uses two workers to reduce load-related timing variance; assertions wait on visible state instead of fixed delays.
 
 ### Regression: `npm run test:regression`
 
@@ -93,7 +93,7 @@ Manual UI checks were **not completed** in this environment. The browser-control
 
 ## Results
 
-Local Windows checks used Node.js 22.6.0 and Playwright 1.49.1 / Chromium 131. The Linux CI simulation used the pinned `mcr.microsoft.com/playwright:v1.49.1-noble` image and Chromium.
+Local Windows component checks used Node.js 22.6.0 and Playwright 1.49.1 / Chromium 131. The full Linux CI simulation used the pinned `mcr.microsoft.com/playwright:v1.49.1-noble` image and Chromium.
 
 | Command                   | Result                                        |
 | ------------------------- | --------------------------------------------- |
@@ -113,7 +113,7 @@ Linux Docker CI simulation ran the quality stage and all three browser suites wi
 | Component, Linux Chromium snapshots         | Pass — 6 tests |
 | Regression (manual workflow-dispatch stage) | Pass — 6 tests |
 
-The GitHub Actions workflow targets Ubuntu Linux with Chromium. Component visual snapshots and the Playwright component build cache are stored separately by operating system because Chromium font rasterization and absolute module paths differ between Windows and Linux. CI uses the Linux Chromium snapshot set. The checkout-form snapshot permits at most 100 differing pixels; refresh snapshots with `npm run test:component:update` in the same OS and Chromium environment used for that baseline, then review the diffs.
+The GitHub Actions workflow runs the component job in the pinned `mcr.microsoft.com/playwright:v1.49.1-noble` container, matching the environment used to capture the Linux Chromium snapshots. Component visual snapshots and the Playwright component build cache are stored separately by operating system because Chromium rendering and absolute module paths differ between Windows and Linux. CI uses the Linux Chromium snapshot set. Component snapshots permit at most 200 differing pixels; refresh snapshots with `npm run test:component:update` in the same OS and Chromium environment used for that baseline, then review the diffs.
 
 ## About unit tests
 

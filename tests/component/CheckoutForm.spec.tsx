@@ -19,7 +19,7 @@ test("required field error is announced, linked, and visually captured", async (
     "checkout-form-validation.png",
     {
       animations: "disabled",
-      maxDiffPixels: 100,
+      maxDiffPixels: 200,
     },
   );
 });

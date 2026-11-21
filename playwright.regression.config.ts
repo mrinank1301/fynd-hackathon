@@ -13,7 +13,7 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:4173",
     ...devices["Desktop Chrome"],
-    viewport: { width: 1280, height: 900 },
+    viewport: { width: 1920, height: 1080 },
     deviceScaleFactor: 1,
     locale: "en-US",
     timezoneId: "UTC",
