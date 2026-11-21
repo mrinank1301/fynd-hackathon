@@ -93,7 +93,7 @@ Manual UI checks were **not completed** in this environment. The browser-control
 
 ## Results
 
-Updated after running checks in the current environment: Windows, Node.js 22.6.0, Playwright 1.49.1 / Chromium 131.
+Local Windows checks used Node.js 22.6.0 and Playwright 1.49.1 / Chromium 131. The Linux CI simulation used the pinned `mcr.microsoft.com/playwright:v1.49.1-noble` image and Chromium.
 
 | Command                   | Result                                        |
 | ------------------------- | --------------------------------------------- |
@@ -104,7 +104,16 @@ Updated after running checks in the current environment: Windows, Node.js 22.6.0
 | `npm run test:functional` | Pass — 5 tests                                |
 | `npm run test:component`  | Pass — 6 tests, screenshot baselines verified |
 
-The GitHub Actions workflow targets Ubuntu Linux with Chromium. Linux execution was not available in this Windows workspace. Visual screenshot snapshots use an OS-neutral path and allow a 12% pixel difference for platform font rasterization.
+Linux Docker CI simulation ran the quality stage and all three browser suites with `CI=1`:
+
+| Stage / suite                               | Result         |
+| ------------------------------------------- | -------------- |
+| Format check, lint, production build        | Pass           |
+| Functional                                  | Pass — 5 tests |
+| Component, Linux Chromium snapshots         | Pass — 6 tests |
+| Regression (manual workflow-dispatch stage) | Pass — 6 tests |
+
+The GitHub Actions workflow targets Ubuntu Linux with Chromium. Component visual snapshots and the Playwright component build cache are stored separately by operating system because Chromium font rasterization and absolute module paths differ between Windows and Linux. CI uses the Linux Chromium snapshot set. The checkout-form snapshot permits at most 100 differing pixels; refresh snapshots with `npm run test:component:update` in the same OS and Chromium environment used for that baseline, then review the diffs.
 
 ## About unit tests
 

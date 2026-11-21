@@ -52,6 +52,13 @@ The same empty-cart and rapid double-click scenarios were checked automatically 
 - **Evidence:** Captured first-run assertion output in `evidence/D-001-before-fix.txt`.
 - **Fix and retest:** Place order remains available to show the empty-cart message; the handler rejects the cart before calling the service. F-04 now passes and asserts the alert and zero service requests.
 
+### D-002 — Component test cache reused Windows paths in Linux (fixed)
+
+- **Steps:** Run the component suite on Windows, then mount the same workspace into Linux and run `npm run test:component`.
+- **Expected:** The Linux component bundle resolves its imports and uses Linux Chromium snapshots.
+- **Actual before fix:** Playwright reused `playwright/.cache/metainfo.json`, which contained Windows absolute paths, and the Linux Vite build failed with `Could not resolve "../../src/components/CartIcon" from "playwright/index.tsx"`.
+- **Fix and retest:** The component build cache and screenshot snapshots are now keyed by `process.platform`. The Windows Chromium suite passes 6/6; the Linux Docker Chromium suite passes 6/6 with the platform-specific baseline.
+
 ## Execution results
 
 Execution results from the current Windows environment. GitHub Actions is configured for Ubuntu Linux; no Linux run was available locally.
@@ -66,3 +73,5 @@ Execution results from the current Windows environment. GitHub Actions is config
 | `npm run test:component`  | Pass — 6 tests |
 
 Environment: Windows, Node.js 22.6.0, Playwright 1.49.1, Chromium 131.
+
+Linux Docker CI simulation: `mcr.microsoft.com/playwright:v1.49.1-noble`, `CI=1`. Format, lint, build, functional 5/5, component 6/6, and regression 6/6 all passed.

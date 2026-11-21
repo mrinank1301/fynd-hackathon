@@ -10,9 +10,11 @@ export default defineConfig({
     ["list"],
     ["html", { outputFolder: "playwright-report/component", open: "never" }],
   ],
-  snapshotPathTemplate: "tests/component/{testFileName}-snapshots/{arg}{ext}",
+  snapshotPathTemplate:
+    "tests/component/{testFileName}-snapshots/{platform}/{arg}{ext}",
   use: {
     ...devices["Desktop Chrome"],
+    ctCacheDir: `playwright/.cache/${process.platform}`,
     viewport: { width: 1280, height: 900 },
     deviceScaleFactor: 1,
     locale: "en-US",
