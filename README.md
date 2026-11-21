@@ -32,7 +32,7 @@ tests/
   functional/        Order API contract, errors, empty cart, duplicate submit
   component/         Cart badge, breakdown, interactions, accessibility, snapshots
 playwright/          Component-test harness
-.github/workflows/   Automatic quality/tests and a separate regression workflow
+.github/workflows/   Single automatic quality and test workflow
 ```
 
 ## Test suites
@@ -43,7 +43,7 @@ Browser suites pin a 1920×1080 viewport, device scale, locale, timezone, color 
 
 ### Regression: `npm run test:regression`
 
-Runs browser-level customer journeys against the local demo: catalog and image loading, successful product → cart → thank-you checkout, missing-name validation, quantity arithmetic, and removing one item while keeping the other. GitHub Actions runs this suite automatically on pushes and pull requests in a separate workflow.
+Runs browser-level customer journeys against the local demo: catalog and image loading, successful product → cart → thank-you checkout, missing-name validation, quantity arithmetic, and removing one item while keeping the other. GitHub Actions runs this suite automatically after the quality, functional, and component jobs pass.
 
 ### Functional: `npm run test:functional`
 
@@ -72,7 +72,7 @@ Playwright HTML reports are written to `playwright-report/<suite>/`. Failure tra
 
 ## CI stages
 
-The quality workflow runs lint, formatting verification, and the production build first. Functional and component jobs then run in parallel. Regression runs automatically in a separate workflow on pushes and pull requests. Reports are uploaded as workflow artifacts.
+The single CI workflow runs lint, formatting verification, and the production build first. Functional and component jobs then run in parallel; regression runs after those jobs pass. Reports are uploaded as workflow artifacts.
 
 ## Test plan and priorities
 
@@ -111,7 +111,7 @@ Linux Docker CI simulation ran the quality stage and all three browser suites wi
 | Format check, lint, production build | Pass           |
 | Functional                           | Pass — 5 tests |
 | Component, Linux Chromium snapshots  | Pass — 6 tests |
-| Regression (automatic workflow)      | Pass — 6 tests |
+| Regression (automatic CI job)        | Pass — 6 tests |
 
 The GitHub Actions workflow runs the component job in the pinned `mcr.microsoft.com/playwright:v1.49.1-noble` container, matching the environment used to capture the Linux Chromium snapshots. Component visual snapshots and the Playwright component build cache are stored separately by operating system because Chromium rendering and absolute module paths differ between Windows and Linux. CI uses the Linux Chromium snapshot set. Component snapshots permit at most 200 differing pixels; refresh snapshots with `npm run test:component:update` in the same OS and Chromium environment used for that baseline, then review the diffs.
 
