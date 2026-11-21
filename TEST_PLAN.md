@@ -82,3 +82,5 @@ Execution results from Windows Chromium and the pinned Linux Chromium Docker ima
 Windows component environment: Node.js 22.6.0, Playwright 1.49.1, Chromium 131.
 
 Linux Docker CI simulation: `mcr.microsoft.com/playwright:v1.49.1-noble`, `CI=1`. Format, lint, build, functional 5/5, component 6/6, and regression 6/6 all passed.
+
+Regression CI runs automatically on pushes and pull requests through the separate `Checkout regression` workflow.
