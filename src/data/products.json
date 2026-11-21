@@ -1,0 +1,50 @@
+[
+  {
+    "id": "field-notes",
+    "name": "Field Notes",
+    "description": "Pocket notebook · set of three",
+    "priceCents": 1200,
+    "image": "/products/field-notes.svg",
+    "imageAlt": "Three pocket notebooks in muted earth tones"
+  },
+  {
+    "id": "trail-bottle",
+    "name": "Trail Bottle",
+    "description": "Insulated stainless steel · 600 ml",
+    "priceCents": 2800,
+    "image": "/products/trail-bottle.svg",
+    "imageAlt": "Sage green insulated steel bottle"
+  },
+  {
+    "id": "canvas-tote",
+    "name": "Canvas Tote",
+    "description": "Heavyweight organic cotton · natural canvas",
+    "priceCents": 2400,
+    "image": "/products/canvas-tote.svg",
+    "imageAlt": "Natural cotton canvas tote bag"
+  },
+  {
+    "id": "camp-mug",
+    "name": "Camp Mug",
+    "description": "Enamel finish · made for the outdoors",
+    "priceCents": 1800,
+    "image": "/products/camp-mug.svg",
+    "imageAlt": "Cream enamel camping mug with a dark green rim"
+  },
+  {
+    "id": "daypack",
+    "name": "Daypack",
+    "description": "Recycled ripstop · 18 litre capacity",
+    "priceCents": 6800,
+    "image": "/products/daypack.svg",
+    "imageAlt": "Olive recycled nylon daypack"
+  },
+  {
+    "id": "key-clip",
+    "name": "Brass Key Clip",
+    "description": "Solid brass · quick-release gate",
+    "priceCents": 1600,
+    "image": "/products/key-clip.svg",
+    "imageAlt": "Brushed brass key clip with a small key ring"
+  }
+]

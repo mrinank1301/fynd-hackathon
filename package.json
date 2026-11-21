@@ -1,0 +1,38 @@
+{
+  "name": "mini-checkout-playwright-suite",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:regression": "playwright test --config=playwright.regression.config.ts",
+    "test:functional": "playwright test --config=playwright.functional.config.ts",
+    "test:component": "playwright test --config=playwright.component.config.ts",
+    "test:all": "npm run test:regression && npm run test:functional && npm run test:component",
+    "test:component:update": "playwright test --config=playwright.component.config.ts --update-snapshots"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1",
+    "@playwright/experimental-ct-react": "1.49.1",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "prettier": "^3.4.2",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.19.1"
+  }
+}

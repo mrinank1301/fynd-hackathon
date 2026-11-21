@@ -1,0 +1,14 @@
+Defect D-001 evidence — first functional run
+
+Command: npm run test:functional
+Test: tests/functional/checkout-api.spec.ts — empty cart is rejected with a visible message and no service request
+Observed assertion failure before the fix:
+
+Timed out 5000ms waiting for expect(locator).toHaveText(expected)
+Locator: getByRole('alert')
+Expected: "Your bag is empty. Add an item before placing your order."
+Received: <element(s) not found>
+
+Reproduction: add the default Field Notes item via the test setup, remove it, activate Place order, and expect an empty-cart alert before any /api/orders request.
+
+The original Playwright screenshot was in test-results, which Playwright clears on a later run. This captured failure excerpt is retained as the evidence artifact; the fixed test now passes and asserts both the alert and zero requests.
